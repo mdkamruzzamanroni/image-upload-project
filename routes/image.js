@@ -30,6 +30,7 @@ router.post("/image-upload",async(req,res)=>{
             limits: { fileSize: maxSize }
           }).array('photos',12)
 
+//req.body= name, father name, age  req.file=image req.files= images
           upload(req,res, (error)=> {  
             console.log("body test", req.body);
             console.log("files test", req.files);

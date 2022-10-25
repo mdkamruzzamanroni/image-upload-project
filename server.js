@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-//DB connection
+//DB connection(not require for image upload)
 // mongoose
 //     .connect(process.env.DATABASE)
 //     .then(()=>console.log("DB connected") )
