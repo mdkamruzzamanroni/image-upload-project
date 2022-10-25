@@ -12,7 +12,7 @@ router.post("/image-upload",async(req,res)=>{
             callback(null,file.originalname)
         },
         });
-        const maxSize=1*1024*1024;//for 1MB
+        const maxSize=6*1024*1024;//for 6MB
         const upload=multer({
             storage:storage,
             fileFilter: (req, file, cb)=> {
@@ -29,6 +29,23 @@ router.post("/image-upload",async(req,res)=>{
             },
             limits: { fileSize: maxSize }
           }).array('photos',12)
+
+          upload(req,res, (error)=> {  
+            console.log("body test", req.body);
+            console.log("files test", req.files);
+
+            if (error instanceof multer.MulterError) {        
+                res.status(400).json({
+                  status:"Fail",
+                  message:error.message
+                })
+              } else if (error) {      
+                res.status(400).json({
+                  status:"Fail",
+                  message:error.message
+                })
+              } 
+        })
     
 
     }catch(err){
@@ -36,3 +53,5 @@ router.post("/image-upload",async(req,res)=>{
 
     }
 });
+
+module.exports=router
